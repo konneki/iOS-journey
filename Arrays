@@ -1,3 +1,0 @@
-# Arrays
-Arrays are complex data types that store ordered list of items. When initiating a variable or a constant with existing data, Swift automatically assign the type which is called *type inference*.
-
