@@ -32,7 +32,7 @@ animals.remove(at: 2) // ["cats", "fish", "chimps", "moose", "geese"]
 It is very important to use indexes you are sure exists. Swift will complain loudly when trying to do anything with array items that does not exist. You may always check if that's true by using `indices.contains(x)`.
 
 ```swift
-if (array.indices.contains(4)) {
+if array.indices.contains(4) {
     // do something
 } else {
     // do something else
