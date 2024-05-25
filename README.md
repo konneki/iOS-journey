@@ -9,3 +9,12 @@ Each folder describes specific topic. Within each folder may be one or more mark
 ### Why it was created
 
 Along the way I may forget a thing or two, that's why I'm creating this little documentation for myself. Packed as much content as possible and categorized correctly, this repo will be on pair with GPT-4o :smile:
+
+### What it contains
+
+1. Arrays
+2. Dictionary
+3. Set
+4. Enum
+5. If, switch and the ternary operator
+6. Type annotation
