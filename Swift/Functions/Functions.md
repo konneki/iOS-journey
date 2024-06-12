@@ -147,3 +147,69 @@ func printTimesTables(for number: Int) {
 
 printTimesTables(for: 5)
 ```
+
+## Default parameter values
+
+The default parameter value can be specified, so providing it in function is optional
+
+```swift
+func printTimesTables(for number: Int, end: Int = 12) {
+    for i in 1...end {
+        print("\(i) x \(number) is \(i * number)")
+    }
+}
+
+printTimesTables(for: 5, end: 20)
+printTimesTables(for: 8) // here end is 12
+```
+
+## Error handling
+
+To handle errors Swift provides its own `Error` type. We can create `enum` to hold their cases
+
+```swift
+enum PasswordError: Error {
+    case short, obvious
+}
+```
+
+To make Swift know that we will be working with a function that may throw an error, we use `throws` keyword before output type. Then in every error occurrence we use use `throw` keyword like so
+
+```swift
+func checkPassword(_ password: String) throws -> String {
+    if password.count < 5 {
+        throw PasswordError.short
+    }
+
+    if password == "12345" {
+        throw PasswordError.obvious
+    }
+
+    if password.count < 8 {
+        return "OK"
+    } else if password.count < 10 {
+        return "Good"
+    } else {
+        return "Excellent"
+    }
+}
+```
+
+Now we know that this function might throw an error, but to present it when running a function we use `do-catch` block with `try` keyword before every throwing function. Also we are able to specify action upon catching specific error types
+
+```swift
+let string = "12345"
+
+do {
+    let result = try checkPassword(string)
+    print("Password rating: \(result)")
+} catch PasswordError.short {
+    print("Please use a longer password.")
+} catch PasswordError.obvious {
+    print("I have the same combination on my luggage!")
+} catch {
+    print("There was an error. Error: \(error.localizedDescription)")
+}
+```
+
+Most errors thrown by Apple provide a meaningful message that you can present to your user if needed. Swift makes this available using an `error` value that’s automatically provided inside your `catch` block, and it’s common to read `error.localizedDescription` to see exactly what happened.
