@@ -99,3 +99,66 @@ let kane = Employee(name: "Lana Kane")
 // Below works just fine
 let poovey = Employee(vacationRemaining: 35)
 ```
+
+## Compute property values dynamically
+
+There are two kinds of properties:
+
+- a stored property is a variable or constant that holds a piece of data inside an instance of the struct
+- a computed property calculates the value of the property dynamically every time it’s accessed
+
+```swift
+struct Employee {
+    let name: String
+    var vacationAllocated = 14 // stored property
+    var vacationTaken = 0 // stored property
+
+    // computed property
+    var vacationRemaining: Int {
+        vacationAllocated - vacationTaken
+    }
+}
+
+var archer = Employee(name: "Sterling Archer", vacationAllocated: 14)
+archer.vacationTaken += 4
+print(archer.vacationRemaining) // 10
+archer.vacationTaken += 4
+print(archer.vacationRemaining) // 6
+```
+
+### Getters and setters
+
+At that moment we cannot write directly to _vacationRemaining_ computed property, as Swift would not know how to handle that. For this purpose we can setup `get` and `set`.
+
+- `get` to read data
+- `set` to write data
+
+The updated code would look as follows:
+
+```swift
+struct Employee {
+    let name: String
+    var vacationAllocated = 14 // stored property
+    var vacationTaken = 0 // stored property
+
+    // computed property
+    var vacationRemaining: Int {
+        get {
+            vacationAllocated - vacationTaken
+        }
+
+        set {
+            vacationAllocated = vacationTaken + newValue
+        }
+    }
+}
+```
+
+`newValue` stores whatever value is provided as a setter. In above case the _vacationAllocated_ property will be updated to make up for it.
+
+```swift
+var archer = Employee(name: "Sterling Archer", vacationAllocated: 14)
+archer.vacationTaken += 4 // 4
+archer.vacationRemaining = 5 // set a newValue as 5, so 4 + 5 = 9
+print(archer.vacationAllocated) // 9
+```
