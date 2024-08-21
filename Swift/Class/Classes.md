@@ -259,3 +259,43 @@ print("Array is clear!")
 //User 3: I'm dead!
 //Array is clear!
 ```
+
+## Working with variables inside classes
+
+Classes are different from structs in a way, that they refer/point to data elsewhere. If one instance of a class has variable and it's changed, it is updated everywhere it is used.
+
+The below code is valid even though a user is a **let** constant.
+
+```swift
+class User {
+    var name = "Paul"
+}
+
+let user = User()
+user.name = "Taylor"
+print(user.name) // Taylor
+```
+
+Now, if we had made the **name** property a constant using **let**, then it could not be changed – we have a constant signpost pointing to a user, but we’ve written their name in permanent ink so that it can’t be erased.
+
+In contrast, what happens if we made both the **user** instance and the **name** property variables? Now we’d be able to change the property, but we’d also be able to change to a wholly new **User** instance if we wanted. To continue the signpost analogy, it would be like turning the signpost to point at wholly different person.
+
+```swift
+class User {
+    var name = "Paul"
+}
+
+var user = User()
+user.name = "Taylor"
+user = User()
+print(user.name) // Paul
+```
+
+There are four options of creating variable/constant mixes:
+
+1. Constant instance, constant property – a signpost that always points to the same user, who always has the same name.
+2. Constant instance, variable property – a signpost that always points to the same user, but their name can change.
+3. Variable instance, constant property – a signpost that can point to different users, but their names never change.
+4. Variable instance, variable property – a signpost that can point to different users, and those users can also change their names.
+
+For that reason classes don't need **mutating** keyword.
