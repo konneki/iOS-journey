@@ -120,3 +120,5 @@ getTravelEstimates(using: [car, bike], distance: 150)
 // Car: 3 hours to travel 150km
 // Bike: 15 hours to travel 150km
 ```
+
+You can conform to as many protocols as you need, just by listing them one by one separated with a comma. If you ever need to subclass something _and_ conform to a protocol, you should put the parent class name first, then write your protocols afterwards.
