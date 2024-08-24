@@ -34,3 +34,48 @@ if let marioOpposite = opposites["Mario"] {
 ```
 
 **marioOpposite** will contain an unwrapped value of **opposites["Mario"]** only when it detects a value inside.
+
+## Unwrapping optionals using guard let
+
+Guard let us unwrap values in very similar way as **if let** and it's the second most common one to use.
+
+Like **if let**, **guard let** checks whether there is a value inside an optional, and if there is it will retrieve the value and place it into a constant of our choosing.
+
+However, the _way_ it does so flips things around:
+
+```swift
+var myVar: Int? = 3
+
+if let unwrapped = myVar {
+    print("Run if myVar has a value inside")
+}
+
+guard let unwrapped = myVar else {
+    print("Run if myVar doesn't have a value inside")
+}
+```
+
+**guard** provides the ability to check whether our program state is what we expect, and if it isn’t to bail out – to exit from the current function, for example.
+
+This is sometimes called an _early return_: we check that all a function’s inputs are valid right as the function starts, and if any aren’t valid we get to run some code then exit straight away. If all our checks pass, our function can run exactly as intended.
+
+**guard** is designed exactly for this style of programming, and in fact does two things to help:
+
+1. If you use **guard** to check a function’s inputs are valid, Swift will always require you to use **return** if the check fails.
+2. If the check passes and the optional you’re unwrapping has a value inside, you can use it after the **guard** code finishes.
+
+```swift
+func printSquare(of number: Int?) {
+    guard let number = number else {
+        print("Missing input")
+
+        // 1: We *must* exit the function here
+        return
+    }
+
+    // 2: `number` is still available outside of `guard`
+    print("\(number) x \(number) is \(number * number)")
+}
+```
+
+You can use guard with any condition, including ones that don’t unwrap optionals. For example, you might use **guard someArray.isEmpty else { return }**.
