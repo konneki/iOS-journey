@@ -112,3 +112,33 @@ let input = ""
 let number = Int(input) ?? 0
 print(number) // 0
 ```
+
+## Optional chaining
+
+Optional chaining is a simplified syntax for reading optionals inside optionals.
+
+Its syntax is pretty straightforward, we use it like so:
+
+```swift
+let names = ["Arya", "Bran", "Robb", "Sansa"]
+
+let chosen = names.randomElement()?.uppercased() ?? "No one"
+print("Next in line: \(chosen)")
+```
+
+If Array of names returns a random element, the code will make it uppercased, but if it return **nil**, then the code will use _No one_ as a result of nil coalescing.
+
+We also can nest things multiple times, for example:
+
+```swift
+struct Book {
+    let title: String
+    let author: String?
+}
+
+var book: Book? = nil
+let author = book?.author?.first?.uppercased() ?? "A"
+print(author) // A
+```
+
+So, it reads “if we have a book, and the book has an author, and the author has a first letter, then uppercase it and send it back, otherwise send back A”.
