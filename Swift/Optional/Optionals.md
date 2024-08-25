@@ -79,3 +79,36 @@ func printSquare(of number: Int?) {
 ```
 
 You can use guard with any condition, including ones that don’t unwrap optionals. For example, you might use **guard someArray.isEmpty else { return }**.
+
+## Unwrapping optionals with nil coalescing
+
+Nil coalescing enables us to provide a default value of optionals of any type. This can be easily demonstrated with dictionaries:
+
+```swift
+let captains = [
+    "Enterprise": "Picard",
+    "Voyager": "Janeway",
+    "Defiant": "Sisko"
+]
+
+let new = captains["Serenity"] ?? "N/A" // N/A
+```
+
+The sign **??** is a nil coalescing and it works in a way, that if there is a value on the left side of it, it will be used, but if there is not, then it will use default one provided by us that is on the right side of it.
+
+Different examples:
+
+```swift
+struct Book {
+    let title: String
+    let author: String?
+}
+
+let book = Book(title: "Beowulf", author: nil)
+let author = book.author ?? "Anonymous"
+print(author) // Anonymous
+
+let input = ""
+let number = Int(input) ?? 0
+print(number) // 0
+```
